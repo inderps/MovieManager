@@ -5,13 +5,13 @@ require('angular-route');
 require('angular-resource');
 require('angular-local-storage');
 require("bootstrap-webpack");
+require("angular-base64-upload");
 require("./templates/main.scss");
 
-angular.module('MovieManager', ['ngRoute', 'ngResource', 'LocalStorageModule'])
+angular.module('MovieManager', ['ngRoute', 'ngResource', 'LocalStorageModule', 'naif.base64'])
   .config(function($routeProvider, localStorageServiceProvider){
     localStorageServiceProvider
       .setPrefix('MovieManager')
-      .setStorageType('sessionStorage')
       .setNotify(true, true);
 
     $routeProvider
