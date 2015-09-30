@@ -8,7 +8,7 @@ angular.module('MovieManager').factory('Picture', ['localStorageService', functi
 
   var find = function(movieId){
     return _.filter(_pictures, function(picture){
-      return picture.movie_id == movieId
+      return picture.movie_id == movieId;
     });
   };
 

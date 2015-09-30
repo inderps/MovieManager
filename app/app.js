@@ -5,6 +5,7 @@ require('angular-route');
 require('angular-resource');
 require('angular-local-storage');
 require("bootstrap-webpack");
+require("./templates/main.scss");
 
 angular.module('MovieManager', ['ngRoute', 'ngResource', 'LocalStorageModule'])
   .config(function($routeProvider, localStorageServiceProvider){
@@ -13,4 +14,16 @@ angular.module('MovieManager', ['ngRoute', 'ngResource', 'LocalStorageModule'])
       .setStorageType('sessionStorage')
       .setNotify(true, true);
 
+    $routeProvider
+      .when('/', {
+        template: require('./templates/main.html')
+      });
 });
+
+// Services
+var services = require.context('./services', true, /.js$/);
+services.keys().forEach(services);
+
+// Controllers
+var controllers = require.context('./controllers', true, /.js$/);
+controllers.keys().forEach(controllers);
