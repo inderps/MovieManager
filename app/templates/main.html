@@ -4,34 +4,34 @@
   </div>
   <div class="row">
     <div class="col-md-4">
-      <div class="panel panel-primary">
+      <div class="panel panel-primary" ng-controller="MovieListController">
         <div class="panel-heading">
           <h3 class="panel-title">Movies</h3>
         </div>
         <div class="panel-body">
-          <form>
+          <form ng-submit="updateMovie()"
+                name="movieForm">
             <div class="form-group">
               <label for="name">Name</label>
-              <input type="text" class="form-control" id="name" placeholder="name">
+              <input type="text" class="form-control" ng-model="name" id="name" placeholder="name">
             </div>
             <div class="form-group">
               <label for="year">Year</label>
-              <input type="text" class="form-control" id="year" placeholder="Year">
+              <input type="number" class="form-control" ng-model="year" id="year" placeholder="Year">
             </div>
-            <button type="submit" class="btn btn-success">Add</button>
+            <button type="submit" ng-disabled="!movieForm.$dirty ||movieForm.$invalid"
+                    class="btn btn-success">{{actionButtonLabel}}</button>
+
+            <ul class="list-group movies">
+              <li class="list-group-item" ng-repeat="movie in movies track by $index">
+                {{movie.name}} ({{movie.year}})
+                <span class="icons">
+                  <span ng-click="toEditMovie(movie, movieForm)" class="glyphicon glyphicon-pencil text-info"></span>
+                  <span ng-click="removeMovie(movie.id)" class="glyphicon glyphicon-remove text-danger"></span>
+                </span>
+              </li>
+            </ul>
           </form>
-          <ul class="list-group movies">
-            <li class="list-group-item">Cras justo odio
-              <span class="icons">
-                <span class="glyphicon glyphicon-pencil text-info"></span>
-                <span class="glyphicon glyphicon-remove text-danger"></span>
-              </span>
-            </li>
-            <li class="list-group-item">Dapibus ac facilisis in</li>
-            <li class="list-group-item">Morbi leo risus</li>
-            <li class="list-group-item">Porta ac consectetur ac</li>
-            <li class="list-group-item">Vestibulum at eros</li>
-          </ul>
         </div>
       </div>
     </div>
