@@ -10,8 +10,12 @@ var preLoaders = [
 
 var loaders = [
   {
-    test: /\.scss$/,
-    loader: 'style!css!sass'
+    test: /\.scss/,
+    loader: 'style-loader!css-loader'
+  },
+  {
+    test: /\.css$/,
+    loader: 'style-loader!css-loader'
   },
   {
     test: /\.html/,
@@ -34,6 +38,7 @@ module.exports = function (config) {
     basePath: '',
     frameworks: ['jasmine'],
     files: [
+      'node_modules/phantomjs-polyfill/bind-polyfill.js',
       'node_modules/angular/angular.js',
       'node_modules/angular-mocks/angular-mocks.js',
       './app/**/*.js',
@@ -54,7 +59,7 @@ module.exports = function (config) {
       }
     },
     preprocessors: {
-      './app/app.js': ['webpack']
+      './app/app.js': ['webpack'],
     },
     plugins: [
       require("karma-webpack"),
