@@ -40,21 +40,19 @@ angular.module('MovieManager').factory('Movie', ['localStorageService', function
       successCallback();
     },
 
-    edit: function(id, newName, newYear, callback) {
+    edit: function(id, newName, newYear) {
       this.all();
       var index = findIndexById(id);
       _movies[index].name = newName;
       _movies[index].year = newYear;
       localStorageService.set(MOVIES_KEY, _movies);
-      callback();
     },
 
-    remove: function(id, callback) {
+    remove: function(id) {
       this.all();
       var index = findIndexById(id);
       _movies.splice(index, 1);
       localStorageService.set(MOVIES_KEY, _movies);
-      callback();
     }
   };
 }]);

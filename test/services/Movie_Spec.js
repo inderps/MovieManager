@@ -79,19 +79,20 @@ describe('Movie', function () {
 
   describe("Edit", function() {
     it('should edit a movie', function () {
-      Movie.edit(1, 'Jurassic World', 2015, function(){
 
-        expect(Movie.all()).toEqual([{id: 1, name: 'Jurassic World', year: 2015},
-          {id: 2, name: 'Titanic', year: 1997}]);
-      });
+      Movie.edit(1, 'Jurassic World', 2015);
+
+      expect(Movie.all()).toEqual([{id: 1, name: 'Jurassic World', year: 2015},
+        {id: 2, name: 'Titanic', year: 1997}]);
     });
   });
 
   describe("Remove", function() {
     it('should remove a movie', function () {
-      Movie.remove(1, function(){
-        expect(Movie.all()).toEqual([{id: 2, name: 'Titanic', year: 1997}]);
-      });
+
+      Movie.remove(1);
+
+      expect(Movie.all()).toEqual([{id: 2, name: 'Titanic', year: 1997}]);
     });
   });
 });
