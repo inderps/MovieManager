@@ -1,4 +1,5 @@
 window.$ = window.jQuery = require('jquery');
+window._ = require('underscore');
 require('angular');
 require('angular-route');
 require('angular-resource');

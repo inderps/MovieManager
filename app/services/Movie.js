@@ -3,22 +3,16 @@ angular.module('MovieManager').factory('Movie', ['localStorageService', function
   var _movies;
 
   var find = function(name, year){
-    for(var i=0; i<_movies.length; i++){
-      if(_movies[i].name == name && _movies[i].year == year){
-        return _movies[i];
-      }
-    }
-    return null;
+    return _.find(_movies, function(movie){
+      return movie.name == name && movie.year == year;
+    });
   };
 
 
   var findIndexById = function(id){
-    for(var i=0; i<_movies.length; i++){
-      if(_movies[i].id == id){
-        return i;
-      }
-    }
-    return -1;
+    return _.findIndex(_movies, function(movie){
+      return movie.id == id;
+    });
   };
 
   return {
