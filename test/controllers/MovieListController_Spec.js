@@ -1,6 +1,7 @@
 describe('MovieListController', function () {
 
   var controller, scope, rootScope;
+
   var mockedMovie = {
     all: function(){
       return [1, 2];
@@ -10,11 +11,16 @@ describe('MovieListController', function () {
     remove: function(id){}
   };
 
+  var mockedPicture = {
+    all: function(){return [2,3];}
+  };
+
   beforeEach(module('MovieManager'));
 
   beforeEach(function () {
     module(function ($provide) {
       $provide.value('Movie', mockedMovie);
+      $provide.value('Picture', mockedPicture);
     });
   });
 
@@ -78,6 +84,16 @@ describe('MovieListController', function () {
 
     expect(mockedMovie.remove).toHaveBeenCalledWith(1);
     expect(rootScope.alertMessage).toEqual('Movie removed successfully');
+  });
+
+
+  it('should set current movie', function () {
+    spyOn(mockedPicture, 'all');
+
+    scope.setCurrentMovie(2);
+
+    expect(mockedPicture.all).toHaveBeenCalledWith(2);
+    expect(rootScope.selectedMovieId).toEqual(2);
   });
 
 });

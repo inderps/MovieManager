@@ -1,10 +1,12 @@
-angular.module('MovieManager').controller('MovieListController', function($scope, $rootScope, Movie){
+angular.module('MovieManager').controller('MovieListController', function($scope, $rootScope, Movie, Picture){
   var reset = function(){
     $scope.actionButtonLabel = 'Add';
     $scope.movieId = -1;
     $scope.name = '';
     $scope.year = '';
     $scope.movies = Movie.all();
+    $rootScope.selectedMovieId = $scope.movies[0].id;
+    $rootScope.pictures = Picture.all($rootScope.selectedMovieId);
   };
 
   reset();
@@ -39,4 +41,13 @@ angular.module('MovieManager').controller('MovieListController', function($scope
     $rootScope.alertMessage = 'Movie removed successfully';
     reset();
   };
+
+  $scope.setCurrentMovie = function(movieId){
+    $rootScope.selectedMovieId = movieId;
+    $rootScope.pictures = Picture.all($rootScope.selectedMovieId);
+  };
+
+  $scope.closeAlert = function(){
+    $rootScope.alertMessage = null;
+  }
 });
