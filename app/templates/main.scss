@@ -1,3 +1,10 @@
 .movies {
   margin-top: 25px;
+
+  .icons{
+    float: right;
+    span {
+      cursor: pointer;
+    }
+  }
 }
