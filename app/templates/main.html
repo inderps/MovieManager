@@ -1,6 +1,12 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12"><h1>Movie Manager</h1></div>
+    <div class="col-md-12" ng-controller="MovieListController">
+      <div class="alert alert-warning" role="alert" ng-show="!!alertMessage">
+        <button type="button" class="close"><span ng-click="closeAlert()">&times;</span></button>
+        {{alertMessage}}
+      </div>
+    </div>
   </div>
   <div class="row">
     <div class="col-md-4">
@@ -24,7 +30,7 @@
 
             <ul class="list-group movies">
               <li class="list-group-item" ng-repeat="movie in movies track by $index">
-                {{movie.name}} ({{movie.year}})
+                <button type="button" ng-click="setCurrentMovie(movie.id)" class="btn btn-link">{{movie.name}} ({{movie.year}})</button>
                 <span class="icons">
                   <span ng-click="toEditMovie(movie, movieForm)" class="glyphicon glyphicon-pencil text-info"></span>
                   <span ng-click="removeMovie(movie.id)" class="glyphicon glyphicon-remove text-danger"></span>
@@ -36,18 +42,28 @@
       </div>
     </div>
     <div class="col-md-8">
-      <div class="panel panel-primary">
+      <div class="panel panel-primary" ng-controller="PictureListController">
         <div class="panel-heading">
           <h3 class="panel-title">Pictures</h3>
         </div>
         <div class="panel-body">
+          <div class="row">
+            <div class="col-md-12">
+              <form class="form-inline" ng-submit="uploadPicture(selectedMovieId)"
+                    name="pictureForm">
+                <div class="form-group">
+                  <input type="file" ng-model="picture" name="picture" accept="image/*, .zip" maxsize="5000" required base-sixty-four-input>
+                  <span ng-show="form.files.$error.maxsize">Files must not exceed 5000 KB</span>
+                </div>
+                <button type="submit" class="btn btn-info" ng-disabled="!pictureForm.$dirty ||pictureForm.$invalid">Upload</button>
+              </form>
+            </div>
+          </div>
           <div class="row images">
-            <div class="col-md-4 image">
-              <img src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUA
-AAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO
-    9TXL0Y4OHwAAAABJRU5ErkJggg==" alt="Red dot" />
+            <div class="col-md-4 image" ng-repeat="picture in pictures track by $index">
+              <img ng-src="data:image/png;base64, {{picture.data}}" />
                <div class="actions">
-                 <button class="btn btn-danger">Remove <span class="glyphicon glyphicon-remove text-danger"></span></button>
+                 <button class="btn btn-link" ng-click="removePicture(picture.id)">Remove</button>
                </div>
             </div>
           </div>

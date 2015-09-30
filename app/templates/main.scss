@@ -2,9 +2,20 @@
   margin-top: 25px;
 
   .icons{
+    margin-top: 10px;
     float: right;
     span {
       cursor: pointer;
+    }
+  }
+}
+
+.images{
+  .image {
+    margin: 10px;
+    img {
+      width: 250px;
+      height: 250px;
     }
   }
 }
