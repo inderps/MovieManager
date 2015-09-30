@@ -1,0 +1,14 @@
+{
+  "name": "movie-manager",
+  "version": "1.0.0",
+  "description": "A angular app to manage your movies and pictures",
+  "main": "app/app.js",
+  "scripts": {
+    "build": "webpack",
+    "dev": "webpack-dev-server --devtool eval --config webpack.config.js --progress --colors --hot --content-base build"
+  },
+  "author": "Inderpal Singh",
+  "devDependencies": {
+    "webpack": "^1.12.2"
+  }
+}
